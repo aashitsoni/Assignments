@@ -1,0 +1,4 @@
+---- CHomeHealthView::OnCompleteOversightBillPrinting Matches (3 in 2 files) ----
+HomeHealthView.cpp (homehealthapp):void CHomeHealthView::OnCompleteOversightBillPrinting()
+HomeHealthView.cpp (homehealthapp):		OnCompleteOversightBillPrinting();
+HomeHealthView.h (homehealthapp):	void OnCompleteOversightBillPrinting();

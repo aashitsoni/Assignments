@@ -1,0 +1,1008 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+#include "verrsrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "#include ""verrsrc.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#include ""res\\MDFMDIApp.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""      // Standard components\r\n"
+    "#include ""afxprint.rc""    // printing/print preview resources\r\n"
+    "#include ""afxdb.rc""        // Database resources\r\n"
+    "#if !defined(_AFXDLL)\r\n"
+    "#include ""afxribbon.rc""        // MFC ribbon and control bar resources\r\n"
+    "#endif\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\HomeHealth.ico"
+IDR_MDFMDIAppTYPE       ICON                    "res\\HomeHealthDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+IDR_MAINFRAME_256       BITMAP                  "res\\Toolbar256.bmp"
+IDC_BITMAP_GREEN_LIGHT  BITMAP                  "res\\green_light.bmp"
+IDB_BITMAP_RED_LIGHT    BITMAP                  "res\\red_light.bmp"
+IDB_BITMAP_YELLOW_LIGHT BITMAP                  "res\\yellow_light.bmp"
+IDB_BITMAP_GREEN_SMALL  BITMAP                  "res\\green_light_s.bmp"
+IDB_BITMAP_RED_SMALL    BITMAP                  "res\\red_light_s.bmp"
+IDB_BITMAP_YELLOW_SMALL BITMAP                  "res\\yellow_light_s.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_RECORD_FIRST
+    BUTTON      ID_RECORD_PREV
+    BUTTON      ID_RECORD_NEXT
+    BUTTON      ID_RECORD_LAST
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_MAINFRAME_256 TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_RECORD_FIRST
+    BUTTON      ID_RECORD_PREV
+    BUTTON      ID_RECORD_NEXT
+    BUTTON      ID_RECORD_LAST
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "&Patient"
+    BEGIN
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent Patients",             ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Reports"
+    BEGIN
+        MENUITEM "&Billing 30 Minutes",         32788
+        MENUITEM "&Today's Appointment",        ID_REPORT_TODAYS_APT
+    END
+    POPUP "&View"
+    BEGIN
+        POPUP "&Toolbars and Docking Windows"
+        BEGIN
+            MENUITEM "<placeholder>",               ID_VIEW_TOOLBAR
+        END
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About HomeHealthApp...",     ID_APP_ABOUT
+    END
+END
+
+IDR_MDFMDIAppTYPE MENU
+BEGIN
+    POPUP "&Patient"
+    BEGIN
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent Patients",             ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&Reports"
+    BEGIN
+        MENUITEM "&Billing 30 Minutes",         ID_REPORT_BILLING_30MINS
+        MENUITEM "Patient &Ledger",             ID_REPORTS_PATIENTLEDGER
+        MENUITEM "&Today's Appointment",        ID_REPORT_TODAYS_APT
+    END
+    POPUP "&View"
+    BEGIN
+        POPUP "&Toolbars and Docking Windows"
+        BEGIN
+            MENUITEM "<placeholder>",               ID_VIEW_TOOLBAR
+        END
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About HomeHealthApp...",     ID_APP_ABOUT
+    END
+END
+
+IDR_POPUP_EDIT MENU
+BEGIN
+    POPUP "Context Edit"
+    BEGIN
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+END
+
+IDR_HELP_MENU MENU
+BEGIN
+    MENUITEM "&About HomeHealthApp...",     ID_APP_ABOUT
+END
+
+IDR_EPISODE_CONTEXT MENU
+BEGIN
+    POPUP "Episode"
+    BEGIN
+        MENUITEM "Add &Oversight",              ID_EPISODE_ADDOVERSIGHT
+        MENUITEM SEPARATOR
+        MENUITEM "&Add Episode",                ID_EPISODE_ADD
+        MENUITEM "&Edit Episode",               ID_EPISODE_EDIT
+        MENUITEM "&Delete Episode",             ID_EPISODE_DELETE
+    END
+    POPUP "Oversight"
+    BEGIN
+        MENUITEM "&Add Oversight",              ID_OVERSIGHT_ADD
+        MENUITEM "&Edit Oversight",             ID_OVERSIGHT_EDIT
+        MENUITEM "&Delete Oversight",           ID_OVERSIGHT_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "&Health Data",                ID_OVERSIGHT_HEALTHDATA
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 213, 72
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About HomeHealth Application"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,21,20
+    LTEXT           "HomeHealth Application Vesion 1.00",IDC_STATIC,42,14,164,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2013",IDC_STATIC,42,26,114,8
+    DEFPUSHBUTTON   "OK",IDOK,156,51,50,14,WS_GROUP
+    LTEXT           "Monika Soni : monusoni@gmail.com",IDC_STATIC,42,38,114,8
+END
+
+IDD_MDFMDIAPP_FORM DIALOGEX 0, 0, 748, 362
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_PATIENT_ID,78,26,46,12,ES_AUTOHSCROLL | NOT WS_TABSTOP
+    COMBOBOX        IDC_COMBO_TITLE,149,26,41,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_PATIENT_LASTNAME,77,42,113,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PATIENT_FIRST_NAME,77,58,113,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PAT_MIDDLE_NAME,77,74,46,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PATIENT_ADDR,236,26,113,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_APARTMENT,236,42,113,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PATIENT_TOWN,236,58,113,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_STATE,236,74,31,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_PATIENT_ZIP,309,73,40,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_HOME_PHONE,410,26,113,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CELL_PHONE,410,42,113,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_WORK_PHONE,410,58,113,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TOTAL_MINS,410,74,113,12,ES_AUTOHSCROLL
+    CONTROL         "",IDC_DATETIMEPATIENTDOB,"SysDateTimePick32",DTS_RIGHTALIGN | WS_TABSTOP,593,26,96,12,WS_EX_RTLREADING | WS_EX_STATICEDGE
+    CONTROL         "",IDC_PATIENT_REGISTRATION,"SysDateTimePick32",DTS_RIGHTALIGN,593,42,96,12
+    CONTROL         "",IDC_PATIENT_LAST_VISIT,"SysDateTimePick32",DTS_RIGHTALIGN,593,58,96,12
+    CONTROL         "",IDC_PATIENT_LAST_BILL,"SysDateTimePick32",DTS_RIGHTALIGN,593,74,61,12
+    PUSHBUTTON      "+",IDC_BUTTON_ADD_EPISODE,509,98,50,11
+    CONTROL         "",IDC_PATIENT_EPISODE,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,20,110,539,82
+    PUSHBUTTON      "+",IDC_BUTTON_ADD_OVERSIGHT,509,203,50,11
+    CONTROL         "",IDC_LIST_OVERSIGHT,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,20,216,539,130
+    GROUPBOX        "",IDC_STATIC,14,15,722,76
+    PUSHBUTTON      "Health Record",IDC_BUTTON_OVERSIGHT_HEALTH,432,203,73,11
+    LTEXT           "Patient Details",IDC_STATIC,7,7,280,8
+    GROUPBOX        "Patient's Episode of Service",IDC_STATIC,13,93,552,104
+    GROUPBOX        "Oversight Billing Detail",IDC_STATIC,13,197,552,156
+    LTEXT           "Patient Id",IDC_STATIC,42,27,32,8
+    LTEXT           "Home Phone",IDC_STATIC,366,27,41,8
+    LTEXT           "Work Phone",IDC_STATIC,367,59,40,8
+    LTEXT           "Middle Name",IDC_STATIC,33,75,41,8
+    LTEXT           "First Name",IDC_STATIC,39,59,35,8
+    LTEXT           "ZIP Code",IDC_STATIC,274,76,30,8
+    LTEXT           "Cell Phone",IDC_STATIC,373,43,34,8
+    LTEXT           "Title",IDC_STATIC,131,28,14,8
+    LTEXT           "Last Name",IDC_STATIC,40,43,34,8
+    LTEXT           "Registration Date",IDC_STATIC,533,44,57,8
+    LTEXT           "Last Visit",IDC_STATIC,561,60,29,8
+    LTEXT           "Last Bill Date",IDC_STATIC,548,76,42,8
+    LTEXT           "Total Minutes",IDC_STATIC,363,75,44,8
+    LTEXT           "Street",IDC_STATIC,212,27,21,8
+    LTEXT           "City",IDC_STATIC,219,59,14,8
+    LTEXT           "State",IDC_STATIC,216,75,18,8
+    LTEXT           "Suite/ apt",IDC_STATIC,201,43,32,8
+    LTEXT           "DOB",IDC_STATIC,575,27,15,8
+    PUSHBUTTON      "",IDC_BUTTON_BILL_CONTROL,697,24,32,64,BS_BITMAP | NOT WS_TABSTOP
+    PUSHBUTTON      "Bill",IDC_BUTTONBill,657,74,32,12
+    GROUPBOX        "Episode Billing Activity",IDC_STATIC,570,93,165,258
+    CONTROL         "",IDC_BILL_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_DISABLED | WS_BORDER | WS_TABSTOP,574,110,155,234
+    COMBOBOX        IDC_COMBO_SEX,149,74,41,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Sex",IDC_STATIC,131,76,13,8
+END
+
+IDD_DIALOG_PATIENT_OPEN DIALOGEX 0, 0, 447, 241
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Open Patient Oversight Record"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_FIRSTNAME,103,22,179,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_LASTNAME,103,40,179,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Search",IDC_BUTTON_SEARCH,313,21,70,14
+    PUSHBUTTON      "&More Searches",IDC_BUTTON_MORE_SEARCH,314,38,70,14
+    CONTROL         "",IDC_LIST_PATIENT_SEARCH,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,18,71,413,148
+    DEFPUSHBUTTON   "OK",IDOK,172,219,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,224,219,50,14
+    LTEXT           "Patient's First Name",IDC_STATIC,34,24,64,8
+    LTEXT           "Paitent's Last Name",IDC_STATIC,34,40,64,8
+    GROUPBOX        "Open Patient's Record",IDC_STATIC,18,9,413,51
+END
+
+IDD_DIALOG_OVERSIGHT_RECORD DIALOGEX 0, 0, 351, 226
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Physician Oversight Billing for Medicare Home Health"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_EPISODEID,65,30,57,12,ES_AUTOHSCROLL | WS_DISABLED
+    EDITTEXT        IDC_EDIT_EPISODE_START_DATE,166,30,57,12,ES_AUTOHSCROLL | WS_DISABLED
+    CONTROL         "",IDC_DATETIME_OVERSIGHT,"SysDateTimePick32",DTS_RIGHTALIGN | WS_TABSTOP,65,73,87,12
+    EDITTEXT        IDC_EDIT_OVERSIGHT_MINS,221,73,58,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_CPO_CODE,65,91,87,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_CPO_CODE_DESCR,24,122,298,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_DIAGNOSIS,24,155,298,37,ES_MULTILINE | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,121,200,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,177,200,50,14
+    LTEXT           "Episode Id",IDC_STATIC,23,32,34,8
+    LTEXT           "Start Date",IDC_STATIC,128,32,34,8
+    GROUPBOX        "Oversight Billing Record",IDC_STATIC,16,59,318,139
+    LTEXT           "Date",IDC_STATIC,23,74,16,8
+    LTEXT           "Minutes",IDC_STATIC,188,75,26,8
+    LTEXT           "Diagnosis: ",IDC_STATIC,24,143,36,8
+    LTEXT           "CPO Code",IDC_STATIC,24,94,34,8
+    LTEXT           "CPO Description:",IDC_STATIC,24,110,55,8
+    EDITTEXT        IDC_EDIT_EPISODE_END_DATE,265,30,57,12,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "End Date",IDC_STATIC,230,31,30,8
+    GROUPBOX        "Episode Details",IDC_STATIC,16,14,318,41
+END
+
+IDD_EPISODE_ADD DIALOGEX 0, 0, 325, 131
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "New Episode of Service"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_PATIENT_NAME,56,13,229,12,ES_AUTOHSCROLL | WS_DISABLED
+    CONTROL         "",IDC_EPISODE_START,"SysDateTimePick32",DTS_RIGHTALIGN | WS_TABSTOP,56,31,91,12
+    CONTROL         "",IDC_EPISODEEND,"SysDateTimePick32",DTS_RIGHTALIGN | WS_DISABLED | WS_TABSTOP,56,49,91,12
+    COMBOBOX        IDC_COMBO_EPISODE_TYPE,56,67,91,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,112,108,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,163,108,50,14
+    LTEXT           "Name",IDC_STATIC,31,15,19,8
+    LTEXT           "Start",IDC_STATIC,33,35,17,8
+    LTEXT           "End",IDC_STATIC,37,52,13,8
+    LTEXT           "Type",IDC_STATIC,33,69,17,8
+    LTEXT           "Dx Codes",IDC_STATIC,157,37,32,8
+    COMBOBOX        IDC_COMBO_HHAGENCY,56,85,91,66,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "HH Agency",IDC_STATIC,15,87,36,8
+    EDITTEXT        IDC_DXCODES,194,31,90,67,ES_MULTILINE | ES_AUTOHSCROLL
+END
+
+IDD_ADD_PATIENT DIALOGEX 0, 0, 467, 226
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Patient Registration"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_PAT_ADD_SALUTATION,80,29,69,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_PAT_ADD_FIRST_NAME,80,51,136,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PAT_ADD_LAST_NAME,287,29,152,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PAT_ADD_MIDDLE_NAME,287,51,152,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PAT_ADD_STREET,80,97,136,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PAT_ADD_APT,80,118,136,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PAT_ADD_TOWN,278,97,162,13,ES_AUTOHSCROLL
+    COMBOBOX        IDC_PAT_ADD_STATE,278,118,40,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_PAT_ADD_COUNTRY,356,118,84,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PAT_ADD_CELL_PHONE,80,158,136,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PAT_ADD_HOME_PHONE,80,178,136,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PAT_ADD_WORK_PHONE,304,158,136,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PAT_ADD_COMMUNICATION_PHONE,304,178,136,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,181,205,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,235,205,50,14
+    LTEXT           "First Name",IDC_STATIC,28,52,35,8
+    LTEXT           "Family Name",IDC_STATIC,233,31,41,8
+    LTEXT           "Middle Name",IDC_STATIC,233,52,41,8
+    LTEXT           "Street",IDC_STATIC,28,98,21,8
+    LTEXT           "Town",IDC_STATIC,233,98,18,8
+    LTEXT           "State",IDC_STATIC,233,119,18,8
+    LTEXT           "Salutation",IDC_STATIC,28,31,33,8
+    LTEXT           "Home Phone",IDC_STATIC,28,180,41,8
+    LTEXT           "Cell Phone",IDC_STATIC,28,162,34,8
+    LTEXT           "Work Phone",IDC_STATIC,233,162,40,8
+    LTEXT           "Communication Phone",IDC_STATIC,232,180,71,8
+    LTEXT           "Country",IDC_STATIC,327,119,27,8
+    GROUPBOX        "Patient Information",IDC_STATIC,17,14,430,60
+    GROUPBOX        "Address",IDC_STATIC,17,81,430,60
+    GROUPBOX        "Communication",IDC_STATIC,17,146,430,52
+    LTEXT           "Apartment",IDC_STATIC,28,119,35,8
+END
+
+IDD_INIT_BILLING DIALOGEX 0, 0, 343, 229
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_CAPTION | WS_SYSMENU
+CAPTION "Initial Billing"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Print",IDOK,120,206,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,173,206,50,14
+    CTEXT           "Department",IDC_DOCTOR_DEPT,51,22,242,10
+    LTEXT           "Physician Home Health Certifications Plan of TX(485)",IDC_STATIC,89,78,168,8
+    LTEXT           "Home Health Agency:",IDC_STATIC,48,104,74,8
+    LTEXT           "Patient Name:",IDC_STATIC,48,121,74,8
+    LTEXT           "Episode of Service:",IDC_STATIC,48,137,74,8
+    LTEXT           "To:",IDC_STATIC,201,139,17,8
+    LTEXT           "Dx Codes:",IDC_STATIC,48,154,57,8
+    EDITTEXT        IDC_HHAGENCY,121,104,168,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_PATIENTNAME,121,121,168,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EOS_FROM,121,137,73,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EOS_TO,216,137,73,12,ES_AUTOHSCROLL | ES_READONLY
+    LISTBOX         IDC_DXCODES_LIST,120,154,93,46,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Doctor Name",IDC_DOCTOR_NAME,51,11,242,10
+    CTEXT           "Address",IDC_DOCTOR_ADDR,51,33,242,10
+    CTEXT           "Town",IDC_DOCTOR_TOWN,51,44,242,10
+    CTEXT           "Phone",IDC_DOCTOR_PHONE,51,55,242,10
+END
+
+IDD_OVERSIGHT_BILLING DIALOGEX 0, 0, 423, 303
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Patient Oversight Billing (G0181)"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Print",IDOK,159,282,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,214,282,50,14
+    LTEXT           "Home Health Agency: ",IDC_STATIC,144,14,72,8
+    EDITTEXT        IDC_HH_AGENCY,216,13,63,12,ES_AUTOHSCROLL
+    LTEXT           "Physician Oversight Billing for Medicare Home Health",IDC_STATIC,127,29,172,12
+    LTEXT           "Patient Name:",IDC_STATIC,13,51,46,8
+    LTEXT           "Month:",IDC_STATIC,35,63,24,8
+    LTEXT           "DOB:",IDC_STATIC,179,52,18,8
+    LTEXT           "Last Seen:",IDC_STATIC,162,63,35,8
+    LTEXT           "Activity:",IDC_STATIC,295,52,28,8
+    LTEXT           "Episode Service:",IDC_STATIC,269,63,54,8
+    GROUPBOX        "Details",IDC_STATIC,10,39,401,40
+    GROUPBOX        "Oversight Records",IDC_STATIC,10,84,401,133
+    CONTROL         "",IDC_OVERSIGHT_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,16,98,389,112
+    LTEXT           "Total Monthly Minutes:",IDC_STATIC,20,228,74,8
+    LTEXT           "* CPO Time Spent must be equal to at least 30 minutes in a calendar month in order to bill medicare",IDC_STATIC,20,241,317,8
+    LTEXT           "Physician Signature:",IDC_STATIC,20,254,66,8
+    LTEXT           "Date:",IDC_STATIC,318,254,19,8
+    LTEXT           "Diagnosis:",IDC_STATIC,163,264,34,8
+    EDITTEXT        IDC_BILL_DATE,340,253,63,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_TOTAL_MINS,94,227,63,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DIAGNOSIS,198,262,63,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NAME,64,49,95,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DOB,201,49,63,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ACTIVITY,326,49,82,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EOS,326,62,82,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LAST_SEEN,201,62,63,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MONTH,63,62,63,12,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "TODO: <Company name>"
+            VALUE "FileDescription", "MDFMDIApp"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "MDFMDIApp.exe"
+            VALUE "LegalCopyright", "TODO: (c) <Company name>.  All rights reserved."
+            VALUE "OriginalFilename", "MDFMDIApp.exe"
+            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 206
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 65
+    END
+
+    IDD_MDFMDIAPP_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 743
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 355
+    END
+
+    IDD_DIALOG_PATIENT_OPEN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 440
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 234
+    END
+
+    IDD_DIALOG_OVERSIGHT_RECORD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 343
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 219
+    END
+
+    IDD_EPISODE_ADD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 318
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 124
+    END
+
+    IDD_ADD_PATIENT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 460
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 219
+    END
+
+    IDD_INIT_BILLING, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 336
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 222
+    END
+
+    IDD_OVERSIGHT_BILLING, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 416
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 296
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_EPISODE_ADD DLGINIT
+BEGIN
+    IDC_COMBO_EPISODE_TYPE, 0x403, 22, 0
+0x6e49, 0x7469, 0x6169, 0x206c, 0x6543, 0x7472, 0x6669, 0x6369, 0x7461, 
+0x6f69, 0x006e, 
+    IDC_COMBO_EPISODE_TYPE, 0x403, 16, 0
+0x6552, 0x6543, 0x7472, 0x6669, 0x6369, 0x7461, 0x6f69, 0x006e, 
+    0
+END
+
+IDD_ADD_PATIENT DLGINIT
+BEGIN
+    IDC_PAT_ADD_SALUTATION, 0x403, 3, 0
+0x724d, "\000" 
+    IDC_PAT_ADD_SALUTATION, 0x403, 4, 0
+0x724d, 0x0073, 
+    IDC_PAT_ADD_SALUTATION, 0x403, 3, 0
+0x7244, "\000" 
+    IDC_PAT_ADD_SALUTATION, 0x403, 3, 0
+0x724a, "\000" 
+    IDC_PAT_ADD_SALUTATION, 0x403, 3, 0
+0x7253, "\000" 
+    IDC_PAT_ADD_STATE, 0x403, 3, 0
+0x414d, "\000" 
+    IDC_PAT_ADD_STATE, 0x403, 6, 0
+0x484e, 0x493a, 0x004c, 
+    IDC_PAT_ADD_STATE, 0x403, 3, 0
+0x4157, "\000" 
+    IDC_PAT_ADD_STATE, 0x403, 3, 0
+0x4143, "\000" 
+    IDC_PAT_ADD_STATE, 0x403, 3, 0
+0x5456, "\000" 
+    IDC_PAT_ADD_STATE, 0x403, 3, 0
+0x594e, "\000" 
+    IDC_PAT_ADD_STATE, 0x403, 3, 0
+0x594b, "\000" 
+    0
+END
+
+IDD_MDFMDIAPP_FORM DLGINIT
+BEGIN
+    IDC_COMBO_TITLE, 0x403, 3, 0
+0x724d, "\000" 
+    IDC_COMBO_TITLE, 0x403, 4, 0
+0x724d, 0x0073, 
+    IDC_COMBO_TITLE, 0x403, 3, 0
+0x7244, "\000" 
+    IDC_COMBO_TITLE, 0x403, 3, 0
+0x7253, "\000" 
+    IDC_COMBO_TITLE, 0x403, 3, 0
+0x724a, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4c41, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4b41, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x5a41, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x5241, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4143, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4f43, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x5443, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4544, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4344, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4c46, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4147, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4948, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4449, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4c49, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4e49, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4149, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x534b, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x594b, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x414c, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x454d, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x444d, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x414d, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x494d, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4e4d, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x534d, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4f4d, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x544d, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x454e, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x564e, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x484e, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4a4e, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4d4e, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x594e, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x434e, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x444e, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x484f, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4b4f, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x524f, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4150, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4952, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4353, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4453, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4e54, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x5854, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x5455, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x5456, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4156, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4157, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x5657, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x4957, "\000" 
+    IDC_COMBO_STATE, 0x403, 3, 0
+0x5957, "\000" 
+    IDC_COMBO_SEX, 0x403, 5, 0
+0x614d, 0x656c, "\000" 
+    IDC_COMBO_SEX, 0x403, 7, 0
+0x6546, 0x616d, 0x656c, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDP_OLE_INIT_FAILED     "OLE initialization failed.  Make sure that the OLE libraries are the correct version."
+    IDS_STRING_DATABASE_PATH "..\\database\\"
+    IDS_STRING_HOMEHEALTH_DATABASE "HealthDatabse.accdb"
+    IDP_FAILED_OPEN_DATABASE "Cannot open database."
+    AFX_IDS_ADD_PATIENT_CONFIRMATION "Confirmation for new Patient record? "
+    AFX_IDS_PATIENT_EDIT_CONFIRM 
+                            "Confirmation for Edit of Patient's Information?"
+    IDS_TITLE_NAME          "Samer N Roy MD"
+    IDS_TITLE_BILL          "Physician Home Health Certifications Plan of TX (485) "
+    IDS_DOCTOR_DEPT         "Internal Medicine"
+    IDS_DOCTOR_ADDR1        "102 Thomas Road Ste. 504"
+    IDS_DOCTOR_ADDR2        "West Monroe LA 71291"
+    IDS_DOCTOR_PHONE        "(318-322-0100)"
+END
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "Home Health Applicaiton"
+    IDR_MDFMDIAppTYPE       "\nHomeHealthApp\nHomeHealthApp\n\n\nHomeHealth.Document\nHomeHealth.Document"
+    ID_WINDOW_MANAGER       "&Windows..."
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "Home Health Application"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW             "Register New Patient\nNew"
+    ID_FILE_OPEN            "Open an Existing Patient\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_DIRECT    "Print the active document using current options\nQuick Print"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle Status Bar"
+END
+
+STRINGTABLE
+BEGIN
+    ID_RECORD_FIRST         "Move to first record\nFirst Record"
+    ID_RECORD_LAST          "Move to final record\nLast Record"
+    ID_RECORD_NEXT          "Move to next record\nNext Record"
+    ID_RECORD_PREV          "Move to previous record\nPrevious Record"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "(318-322-0100)"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STATUS_PANE1        "Pane 1"
+    IDS_STATUS_PANE2        "Pane 2"
+    IDS_TOOLBAR_STANDARD    "Standard"
+    IDS_TOOLBAR_CUSTOMIZE   "Customize..."
+    IDS_PATIENT_MASTER_ERROR "Patient Master, Database error"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_EDIT_MENU           "Edit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_REPORT_BILLING_30MINS "30 Minutes Billing report"
+    ID_REPORT_TODAYS_APT    "Today's Appointment"
+END
+
+STRINGTABLE
+BEGIN
+    ID_PRINTED_BILL         "Processed Bill printing"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#include "res\MDFMDIApp.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"      // Standard components
+#include "afxprint.rc"    // printing/print preview resources
+#include "afxdb.rc"        // Database resources
+#if !defined(_AFXDLL)
+#include "afxribbon.rc"        // MFC ribbon and control bar resources
+#endif
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

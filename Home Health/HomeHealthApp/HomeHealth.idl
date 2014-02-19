@@ -1,0 +1,17 @@
+// MDFMDIApp.idl : IDL source for MDFMDIApp
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MDFMDIApp.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(26313747-B3E8-4D67-82AA-4714AC22E9B7),
+	version(1.0)	
+]
+library MDFMDIAppLib
+{
+	importlib("stdole2.tlb");
+};
