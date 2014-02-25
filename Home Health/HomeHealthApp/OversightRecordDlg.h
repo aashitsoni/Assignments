@@ -10,6 +10,8 @@ class COversightRecordDlg : public CDialogEx
 {
 	DECLARE_DYNAMIC(COversightRecordDlg)
 	long findCPOCode(CString& szCPOCode);
+	CTime m_ct_episode_start;
+	CTime m_ct_episode_end;
 
 public:
 	COversightRecordDlg(CWnd* pParent = NULL);   // standard constructor
@@ -41,4 +43,5 @@ public:
 	CString		m_szEpisodeStartDate;
 	CString		m_szEpisodeEndDate;
 
+	afx_msg void OnCbnSelchangeComboCpoCode();
 };

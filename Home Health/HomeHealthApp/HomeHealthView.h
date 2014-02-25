@@ -173,6 +173,9 @@ public:
     CComboBox m_comboSex;
     afx_msg void OnOversightEdit();
     afx_msg void OnOversightDelete();
+//	afx_msg void OnCbnSelchangeCombo2();
+private:
+	CComboBox m_comboCommunication;
 };
 
 #ifndef _DEBUG  // debug version in MDFMDIAppView.cpp

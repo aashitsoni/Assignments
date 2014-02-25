@@ -42,7 +42,8 @@ void CInitialBillingDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_HHAGENCY, m_hhAgency);
 	DDX_Text(pDX, IDC_EOS_FROM, m_episode_from);
 	DDX_Text(pDX, IDC_EOS_TO, m_episode_to);
-	DDX_Control(pDX, IDC_DXCODES_LIST, m_dx_codes);
+	//  DDX_Control(pDX, IDC_DXCODES_LIST, m_dx_codes);
+	DDX_Text(pDX, IDC_DX_EDITBOX, m_dx_codes);
 }
 
 
@@ -84,7 +85,7 @@ BOOL CInitialBillingDlg::OnInitDialog()
 									m_selectedEpisode->m_episode_end_date.GetYear());
 
 	m_hhAgency = m_selectedEpisode->m_episode_hh_agency_name;
-	m_dx_codes.AddString(m_selectedEpisode->m_episode_dx_codes);
+	m_dx_codes = m_selectedEpisode->m_episode_dx_codes;
 
 	UpdateData(FALSE);
 	return TRUE;  // return TRUE unless you set the focus to a control

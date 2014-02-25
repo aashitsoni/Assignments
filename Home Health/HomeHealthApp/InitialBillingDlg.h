@@ -29,5 +29,6 @@ public:
 	CString m_hhAgency;
 	CString m_episode_from;
 	CString m_episode_to;
-	CListBox m_dx_codes;
+//	CListBox m_dx_codes;
+	CString m_dx_codes;
 };

@@ -44,6 +44,8 @@ COversightRecordDlg::COversightRecordDlg(long patient_id,long episode_id,CTime& 
 		m_OversightDateTime = ctLocalTime;
 		m_patient_id = patient_id;
 		m_episode_id = episode_id;
+		m_ct_episode_start = episode_start_date;
+		m_ct_episode_end = episode_end_date;
 
 		m_szEpisodeStartDate.Format(_T("%d/%d/%d"),episode_start_date.GetMonth(),episode_start_date.GetDay(),episode_start_date.GetYear());
 		m_szEpisodeEndDate.Format(_T("%d/%d/%d"),episode_end_date.GetMonth(),episode_end_date.GetDay(),episode_end_date.GetYear());
@@ -65,8 +67,6 @@ void COversightRecordDlg::DoDataExchange(CDataExchange* pDX)
 
 	DDX_DateTimeCtrl(pDX, IDC_DATETIME_OVERSIGHT, m_OversightDateTime);
 	DDX_Text(pDX, IDC_EDIT_OVERSIGHT_MINS, m_Oversight_minutes);
-	DDX_Text(pDX, IDC_EDIT_DIAGNOSIS, m_szDiagnosis);
-
 	DDX_Control(pDX, IDC_COMBO_CPO_CODE, m_ComboBoxCPOBox);
 	DDX_Text(pDX, IDC_CPO_CODE_DESCR, m_szCPODescr);
 }
@@ -74,6 +74,7 @@ void COversightRecordDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(COversightRecordDlg, CDialogEx)
 	ON_BN_CLICKED(IDOK, &COversightRecordDlg::OnBnClickedOk)
+	ON_CBN_SELCHANGE(IDC_COMBO_CPO_CODE, &COversightRecordDlg::OnCbnSelchangeComboCpoCode)
 END_MESSAGE_MAP()
 
 
@@ -101,50 +102,6 @@ long COversightRecordDlg::findCPOCode(CString& szCPOCode)
 	cpo_code_master.Close();
 	
 	return cpo_code; 
-}
-
-void COversightRecordDlg::OnBnClickedOk()
-{
-	CHomeHealthApp*pApp = (CHomeHealthApp*)AfxGetApp();
-	CHomeHealthDatabase* pDB = pApp->GetHomeHealthDatabase();
-	Coversight_billing  billing(pDB->GetDatabase());
-	TCHAR min[5];
-	CString szCPOCode;
-
-	if(m_patient_id == -1 || m_episode_id == -1)
-	{
-		AfxMessageBox(_T("Oversight Record is not properly initialized"));
-		CDialogEx::OnCancel();
-		return;
-	}
-
-	UpdateData(TRUE);
-
-	billing.OpenForAdd();
-	billing.AddNew();
-
-	int sel = m_ComboBoxCPOBox.GetCurSel();
-
-	// initialize the values
-	billing.m_patient_oversight_date = m_OversightDateTime;
-
-
-	billing.m_patient_oversight_minute = _ttoi(m_Oversight_minutes);
-	billing.m_patient_id = m_patient_id;
-	billing.m_patient_episode_id = m_episode_id;
-	m_ComboBoxCPOBox.GetLBText(sel,szCPOCode);
-	
-	billing.m_patient_oversight_cpo_code = findCPOCode(szCPOCode);
-
-	billing.m_patient_oversight_cpo_desc = m_szCPODescr;
-	billing.m_patient_oversight_diagnosis = m_szCPODescr;
-	m_Oversight_billing_mintues = billing.m_patient_oversight_minute;
-
-	billing.Update();
-
-
-	// TODO: Add your control notification handler code here
-	CDialogEx::OnOK();
 }
 
 
@@ -176,3 +133,92 @@ BOOL COversightRecordDlg::OnInitDialog()
 	
 	return TRUE;
 }
+
+
+void COversightRecordDlg::OnCbnSelchangeComboCpoCode()
+{
+	int sel = m_ComboBoxCPOBox.GetCurSel();
+	CString szText;
+
+	m_ComboBoxCPOBox.GetLBText(sel,szText);
+	if(szText == _T("Others, please describe"))
+	{
+		GetDlgItem(IDC_CPO_CODE_DESCR)->EnableWindow(TRUE);
+	}
+	else
+	{
+		GetDlgItem(IDC_CPO_CODE_DESCR)->EnableWindow(FALSE);
+	}
+
+	// TODO: Add your control notification handler code here
+}
+
+void COversightRecordDlg::OnBnClickedOk()
+{
+	CHomeHealthApp*pApp = (CHomeHealthApp*)AfxGetApp();
+	CHomeHealthDatabase* pDB = pApp->GetHomeHealthDatabase();
+	Coversight_billing  billing(pDB->GetDatabase());
+	TCHAR min[5];
+	CString szCPOCode;
+	long iMinutes = 0,cpo_code = 0;
+
+	if(m_patient_id == -1 || m_episode_id == -1)
+	{
+		AfxMessageBox(_T("Oversight Record is not properly initialized"),MB_OK,MB_ICONERROR);
+		CDialogEx::OnCancel();
+		return;
+	}
+
+	UpdateData(TRUE);
+
+	if(m_OversightDateTime < m_ct_episode_start || m_OversightDateTime > m_ct_episode_end)
+	{
+		CString szMsg;
+		szMsg.Format(_T("Oversight Date shall be in range: %s - %s"),m_szEpisodeStartDate,m_szEpisodeEndDate);
+		AfxMessageBox(szMsg,MB_OK,MB_ICONERROR);
+		GetDlgItem(IDC_DATETIME_OVERSIGHT)->SetFocus();
+		return;
+	}
+
+	iMinutes = _ttoi(m_Oversight_minutes);
+	if(iMinutes <= 0)
+	{
+		AfxMessageBox(_T("Invalid Oversight billing minutes"),MB_OK,MB_ICONERROR);
+		GetDlgItem(IDC_EDIT_OVERSIGHT_MINS)->SetFocus();
+		return;
+	}
+
+	// select the CPO code and descriptions
+	int sel = m_ComboBoxCPOBox.GetCurSel();
+	m_ComboBoxCPOBox.GetLBText(sel,szCPOCode);
+	cpo_code = findCPOCode(szCPOCode);
+
+	if(szCPOCode == _T("Others, please describe"))
+	{
+		GetDlgItem(IDC_CPO_CODE_DESCR)->GetWindowText(szCPOCode);
+	}
+
+
+	billing.OpenForAdd();
+	billing.AddNew();
+
+	// initialize the values
+	billing.m_patient_oversight_date = m_OversightDateTime;
+
+
+	billing.m_patient_oversight_minute = iMinutes;
+	billing.m_patient_id = m_patient_id;
+	billing.m_patient_episode_id = m_episode_id;
+	
+	billing.m_patient_oversight_cpo_code = cpo_code;
+	billing.m_patient_oversight_cpo_desc = szCPOCode;
+
+	m_Oversight_billing_mintues = billing.m_patient_oversight_minute;
+
+	billing.Update();
+
+
+	// TODO: Add your control notification handler code here
+	CDialogEx::OnOK();
+}
+

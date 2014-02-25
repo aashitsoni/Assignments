@@ -59,6 +59,7 @@ BEGIN_MESSAGE_MAP(CHomeHealthView, CRecordView)
 	ON_NOTIFY(DTN_DATETIMECHANGE, IDC_PATIENT_LAST_VISIT, &CHomeHealthView::OnDtnDatetimechangePatientLastVisit)
 	ON_COMMAND(ID_OVERSIGHT_EDIT, &CHomeHealthView::OnOversightEdit)
 	ON_COMMAND(ID_OVERSIGHT_DELETE, &CHomeHealthView::OnOversightDelete)
+//	ON_CBN_SELCHANGE(IDC_COMBO2, &CHomeHealthView::OnCbnSelchangeCombo2)
 END_MESSAGE_MAP()
 
 // CHomeHealthView construction/destruction
@@ -131,7 +132,6 @@ void CHomeHealthView::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT_PATIENT_ADDR, m_szPatientAddress);
 	DDX_Text(pDX, IDC_EDIT_PATIENT_TOWN, m_szPatientTown);
 	DDX_Text(pDX, IDC_EDIT_PATIENT_LASTNAME, m_szPatientName);
-	DDX_Text(pDX, IDC_EDIT_TOTAL_MINS, m_szTotalMinutes);
 	DDX_Control(pDX, IDC_COMBO_TITLE, m_comboTitle);
 	DDX_Control(pDX, IDC_COMBO_STATE, m_comboState);
 	DDX_Text(pDX, IDC_EDIT_APARTMENT, m_szApartment);
@@ -148,6 +148,7 @@ void CHomeHealthView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_BILL_CONTROL, m_btnBillIndicator);
 	DDX_Control(pDX, IDC_BILL_LIST, m_listEpisodeBill);
 	DDX_Control(pDX, IDC_COMBO_SEX, m_comboSex);
+	DDX_Control(pDX, IDC_COMM_COMBO, m_comboCommunication);
 }
 
 BOOL CHomeHealthView::PreCreateWindow(CREATESTRUCT& cs)
@@ -182,7 +183,7 @@ BOOL CHomeHealthView::CreateEpisodeControlColumns()
 {
 	CRect rect;
 	m_episodeListCtrl.GetClientRect(&rect);
-	int nColInterval = rect.Width()/7;
+	int nColInterval = rect.Width()/8;
 
 	m_episodeListCtrl.SetExtendedStyle(LVS_EX_GRIDLINES|LVS_EX_FULLROWSELECT);
 
@@ -192,7 +193,7 @@ BOOL CHomeHealthView::CreateEpisodeControlColumns()
 	m_episodeListCtrl.InsertColumn(3,_T("End"),LVCFMT_LEFT,nColInterval);
 	m_episodeListCtrl.InsertColumn(4,_T("IsActive"),LVCFMT_LEFT,nColInterval);
 	m_episodeListCtrl.InsertColumn(5,_T("Total Minutes"),LVCFMT_LEFT,nColInterval);
-	m_episodeListCtrl.InsertColumn(6,_T("Dx codes"),LVCFMT_LEFT,nColInterval);
+	m_episodeListCtrl.InsertColumn(6,_T("Dx codes"),LVCFMT_LEFT,nColInterval*2);
 
 	return TRUE;
 
@@ -382,8 +383,8 @@ BOOL CHomeHealthView::CreateOversightConrolColumns()
 	nColInterval = rect.Width()/6;
 
 	m_OverSightListCtrl.InsertColumn(0,_T("Oversight ID"),LVCFMT_LEFT,nColInterval);
-	m_OverSightListCtrl.InsertColumn(1,_T("CPO code"),LVCFMT_LEFT,nColInterval);
-	m_OverSightListCtrl.InsertColumn(2,_T("CPO Name"),LVCFMT_LEFT,nColInterval+nColInterval);
+	m_OverSightListCtrl.InsertColumn(1,_T("CPO Code"),LVCFMT_LEFT,nColInterval);
+	m_OverSightListCtrl.InsertColumn(2,_T("CPO Description"),LVCFMT_LEFT,nColInterval+nColInterval);
 	m_OverSightListCtrl.InsertColumn(3,_T("Date"),LVCFMT_LEFT,nColInterval);
 	m_OverSightListCtrl.InsertColumn(4,_T("Minutes"),LVCFMT_LEFT,nColInterval);
 	return TRUE;
@@ -480,7 +481,14 @@ BOOL CHomeHealthView::PopulateOversightControlData()
 			lvitem.pszText= (LPTSTR)(LPCTSTR)(strItem);
 			m_OverSightListCtrl.SetItem(&lvitem);
 
-			findCPOCodeName(billing.m_patient_oversight_cpo_code,strItem);
+			if(billing.m_patient_oversight_cpo_code == 10)
+			{
+				strItem = billing.m_patient_oversight_cpo_desc;
+			}
+			else
+			{
+				findCPOCodeName(billing.m_patient_oversight_cpo_code,strItem);
+			}
 			lvitem.iSubItem = 2;
 			lvitem.pszText= (LPTSTR)(LPCTSTR)(strItem);
 			m_OverSightListCtrl.SetItem(&lvitem);
@@ -536,6 +544,13 @@ void CHomeHealthView::PopulateView()
 	m_szHomePhone = m_ActivePatient->m_patient_home_phone;
 	m_szWorkPhone = m_ActivePatient->m_patient_work_phone;
 
+	if(m_szCellPhone == m_ActivePatient->m_patient_communication_phone)
+		m_comboCommunication.SelectString(0,_T("Cell"));
+	else if(m_szWorkPhone == m_ActivePatient->m_patient_communication_phone)
+		m_comboCommunication.SelectString(0,_T("Work"));
+	else
+		m_comboCommunication.SelectString(0,_T("Home"));
+
 	m_PatientDOB = m_ActivePatient->m_patient_dob;
 
 	m_szTotalMinutes.Format(L"%d",m_ActivePatient->m_patient_billable_minutes);
@@ -549,7 +564,7 @@ void CHomeHealthView::PopulateView()
 	GetDlgItem(IDC_PATIENT_REGISTRATION)->EnableWindow(FALSE);
 	GetDlgItem(IDC_PATIENT_LAST_VISIT)->EnableWindow(FALSE);
 	GetDlgItem(IDC_PATIENT_LAST_BILL)->EnableWindow(FALSE);
-	GetDlgItem(IDC_EDIT_TOTAL_MINS)->EnableWindow(FALSE);
+	//GetDlgItem(IDC_EDIT_TOTAL_MINS)->EnableWindow(FALSE);
 
 	GetDlgItem(IDC_BUTTON_ADD_EPISODE)->EnableWindow(TRUE);
 	GetDlgItem(IDC_PATIENT_EPISODE)->EnableWindow(TRUE);
@@ -597,7 +612,7 @@ void CHomeHealthView::PopulateNewForm()
 		GetDlgItem(IDC_PATIENT_REGISTRATION)->EnableWindow(FALSE);
 		GetDlgItem(IDC_PATIENT_LAST_VISIT)->EnableWindow(FALSE);
 		GetDlgItem(IDC_PATIENT_LAST_BILL)->EnableWindow(FALSE);
-		GetDlgItem(IDC_EDIT_TOTAL_MINS)->EnableWindow(FALSE);
+		//GetDlgItem(IDC_EDIT_TOTAL_MINS)->EnableWindow(FALSE);
 
 		GetDlgItem(IDC_BUTTON_ADD_EPISODE)->EnableWindow(FALSE);
 		GetDlgItem(IDC_PATIENT_EPISODE)->EnableWindow(FALSE);
@@ -1423,6 +1438,8 @@ BOOL CHomeHealthView::ValidatePatientInformation()
 
 void CHomeHealthView :: OnPatientSaveNew()
 {
+	CString szString;
+
 	if(IDOK != AfxMessageBox(AFX_IDS_ADD_PATIENT_CONFIRMATION,MB_OKCANCEL) )
 		return;
 
@@ -1466,6 +1483,18 @@ void CHomeHealthView :: OnPatientSaveNew()
 	m_ActivePatient->m_patient_last_bill_date = 0;
 	m_ActivePatient->m_patient_billable_minutes = 0;
 	m_ActivePatient->m_patient_oversight_bill_date = 0;
+	
+	sel = m_comboCommunication.GetCurSel();
+	m_comboCommunication.GetLBText(sel,szString);
+	if(FALSE == szString.IsEmpty())
+	{
+		if(szString == _T("Cell"))
+			m_ActivePatient->m_patient_communication_phone = m_szCellPhone;
+		else if(szString == _T("Work"))
+				m_ActivePatient->m_patient_communication_phone = m_szWorkPhone;
+	}
+	
+
 
 	m_ActivePatient->Update();
 
@@ -1487,6 +1516,9 @@ void CHomeHealthView :: OnPatientSaveNew()
 /*Edit patient's information*/
 void CHomeHealthView::OnPatientSaveEdit()
 {
+
+	CString szString;
+
 	if(IDOK != AfxMessageBox(AFX_IDS_PATIENT_EDIT_CONFIRM,MB_OKCANCEL) )
 		return;
 
@@ -1525,6 +1557,17 @@ void CHomeHealthView::OnPatientSaveEdit()
 	patient_master.m_patient_communication_phone = m_szHomePhone;
 	//patient_master.m_patient_country = m_szCountry;
 	patient_master.m_patient_zip = m_szPatientZip;
+
+	sel = m_comboCommunication.GetCurSel();
+	m_comboCommunication.GetLBText(sel,szString);
+	if(FALSE == szString.IsEmpty())
+	{
+		if(szString == _T("Cell"))
+			m_ActivePatient->m_patient_communication_phone = m_szCellPhone;
+		else if(szString == _T("Work"))
+				m_ActivePatient->m_patient_communication_phone = m_szWorkPhone;
+	}
+
 
 	patient_master.Update();
 	patient_master.Close();
@@ -1838,7 +1881,7 @@ void CHomeHealthView::OnOversightDelete()
 		{
 		if(oversight.m_patient_oversight_billed == TRUE)
 			{
-			AfxMessageBox(_T("Oversight is already billed. It can not be removed now"),MB_OK);
+			AfxMessageBox(_T("Oversight is already billed. It can not be removed now"),MB_OK,MB_ICONERROR);
 			return;
 			}
 		else
@@ -1857,3 +1900,9 @@ void CHomeHealthView::OnOversightDelete()
 		}
 	return;
 }
+
+
+//void CHomeHealthView::OnCbnSelchangeCombo2()
+//{
+//	// TODO: Add your control notification handler code here
+//}
