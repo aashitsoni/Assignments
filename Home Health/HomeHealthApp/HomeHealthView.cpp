@@ -877,10 +877,26 @@ void CHomeHealthView::printInitialBilling(CDC* pDC,CPrintInfo* pInfo)
 		pos_y += (row_height + row_margin);
 		pDC->TextOutW(pos_x,pos_y,szText,szText.GetLength());
 
-		szText.Format(L"DX Codes: %s",m_activePatientEpisode->m_episode_dx_codes);
+		CString szToken,szString;
+		szString.Format(_T("%s"),m_activePatientEpisode->m_episode_dx_codes);
+		szText.Format(L"DX Codes: ");
 		pos_x  = margin;		
 		pos_y += (row_height + row_margin);
-		pDC->TextOutW(pos_x,pos_y,szText,szText.GetLength());
+
+		if(szString.GetLength() > 0)
+		{
+			int curPos = 0;
+			szToken = szString.Tokenize(_T("\r\n"),curPos);
+			while(szToken !=_T(""))
+			{
+				szText += szToken;
+				pDC->TextOutW(pos_x,pos_y,szText,szText.GetLength());
+				szText.Format(L"          ");
+				szToken = szString.Tokenize(_T("\r\n"),curPos);
+				pos_y += (row_height);
+			}
+		}
+	
 
 		if(m_activePatientEpisode->m_episode_type.CompareNoCase(L"ReCertification") == 0) 
 			szText.Format(L"_____________ Review and Signature of HH Plan for %s G0179",m_activePatientEpisode->m_episode_type);
@@ -888,7 +904,7 @@ void CHomeHealthView::printInitialBilling(CDC* pDC,CPrintInfo* pInfo)
 			szText.Format(L"_____________ Review and Signature of HH Plan for %s G0180",m_activePatientEpisode->m_episode_type);
 
 		pos_x  = margin;		
-		pos_y += (row_height + row_margin*3);
+		pos_y += (row_height + row_margin*2);
 		pDC->TextOutW(pos_x,pos_y,szText,szText.GetLength());
 	
 		szText.Format(L"Signature of MD:____________________",m_activePatientEpisode->m_episode_type);
@@ -1901,8 +1917,3 @@ void CHomeHealthView::OnOversightDelete()
 	return;
 }
 
-
-//void CHomeHealthView::OnCbnSelchangeCombo2()
-//{
-//	// TODO: Add your control notification handler code here
-//}

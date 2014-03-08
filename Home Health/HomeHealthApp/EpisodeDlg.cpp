@@ -136,6 +136,13 @@ void CEpisodeDlg::OnBnClickedOk()
 		m_selectedEpisode->Update();
 	}
 
+	if(m_szDxCodes.IsEmpty())
+	{
+		if(IDYES != AfxMessageBox(_T("DxCodes are not filled in, Are you sure want to continue?"),MB_YESNO))
+			return;
+
+	}
+
 	m_selectedEpisode->AddNew();
 
 	int sel = m_episode_type.GetCurSel();
