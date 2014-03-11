@@ -38,14 +38,15 @@ COversightRecordDlg::COversightRecordDlg(long patient_id,long episode_id,CTime& 
 	, m_szEpisodeEndDate(_T(""))
 	, m_szCPODescr(_T(""))
 	, m_szDiagnosis(_T(""))
+	, m_ct_episode_start (episode_start_date)
+	, m_ct_episode_end (episode_end_date)
+
 {
 		CTime ctLocalTime(((CHomeHealthApp* )AfxGetApp())->m_localTime);
 
 		m_OversightDateTime = ctLocalTime;
 		m_patient_id = patient_id;
 		m_episode_id = episode_id;
-		m_ct_episode_start = episode_start_date;
-		m_ct_episode_end = episode_end_date;
 
 		m_szEpisodeStartDate.Format(_T("%d/%d/%d"),episode_start_date.GetMonth(),episode_start_date.GetDay(),episode_start_date.GetYear());
 		m_szEpisodeEndDate.Format(_T("%d/%d/%d"),episode_end_date.GetMonth(),episode_end_date.GetDay(),episode_end_date.GetYear());
@@ -153,6 +154,24 @@ void COversightRecordDlg::OnCbnSelchangeComboCpoCode()
 	// TODO: Add your control notification handler code here
 }
 
+int COversightRecordDlg::CompareDates(CTime* time1,CTime* time2)
+{
+	if(time1->GetYear() < time2->GetYear())
+		return -1;
+	else if(time1->GetYear() > time2->GetYear())
+		return 1;
+	else if(time1->GetMonth() < time2->GetMonth())
+		return -1;
+	else if(time1->GetMonth() > time2->GetMonth())
+		return 1;
+	else if(time1->GetDay() < time2->GetDay())
+		return -1;
+	else if(time1->GetDay() > time2->GetDay())
+		return 1;
+	else 
+		return 0;
+}
+
 void COversightRecordDlg::OnBnClickedOk()
 {
 	CHomeHealthApp*pApp = (CHomeHealthApp*)AfxGetApp();
@@ -171,7 +190,10 @@ void COversightRecordDlg::OnBnClickedOk()
 
 	UpdateData(TRUE);
 
-	if(m_OversightDateTime < m_ct_episode_start || m_OversightDateTime > m_ct_episode_end)
+	CTimeSpan span = m_OversightDateTime - m_ct_episode_start;
+	
+	if(CompareDates(&m_OversightDateTime,&m_ct_episode_start) < 0  ||
+		CompareDates(&m_ct_episode_end, &m_OversightDateTime) < 0 )
 	{
 		CString szMsg;
 		szMsg.Format(_T("Oversight Date shall be in range: %s - %s"),m_szEpisodeStartDate,m_szEpisodeEndDate);

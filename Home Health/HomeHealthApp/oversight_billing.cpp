@@ -22,7 +22,8 @@ Coversight_billing::Coversight_billing(CDatabase* pdb)
 	m_patient_oversight_cpo_desc = L"";
 	m_patient_oversight_diagnosis = L"";
 	m_patient_oversight_billed = FALSE;
-	m_nFields = 9;
+	m_patient_bill_number = 0;
+	m_nFields = 10;
 	m_nDefaultType = dynaset;
 }
 //#error Security Issue: The connection string may contain a password
@@ -58,6 +59,7 @@ void Coversight_billing::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[patient_oversight_cpo_desc]"), m_patient_oversight_cpo_desc);
 	RFX_Text(pFX, _T("[patient_oversight_diagnosis]"),m_patient_oversight_diagnosis);
 	RFX_Bool(pFX, _T("[patient_oversight_billed]"),m_patient_oversight_billed);
+	RFX_Long(pFX, _T("[patient_bill_number]"),m_patient_bill_number);
 
 }
 /////////////////////////////////////////////////////////////////////////////

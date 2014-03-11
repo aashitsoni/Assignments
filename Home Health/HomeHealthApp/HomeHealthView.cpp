@@ -192,14 +192,32 @@ BOOL CHomeHealthView::CreateEpisodeControlColumns()
 	m_episodeListCtrl.InsertColumn(2,_T("Start"),LVCFMT_LEFT,nColInterval);
 	m_episodeListCtrl.InsertColumn(3,_T("End"),LVCFMT_LEFT,nColInterval);
 	m_episodeListCtrl.InsertColumn(4,_T("IsActive"),LVCFMT_LEFT,nColInterval);
-	m_episodeListCtrl.InsertColumn(5,_T("Total Minutes"),LVCFMT_LEFT,nColInterval);
+	m_episodeListCtrl.InsertColumn(5,_T("Oversight Minutes"),LVCFMT_LEFT,nColInterval);
 	m_episodeListCtrl.InsertColumn(6,_T("Dx codes"),LVCFMT_LEFT,nColInterval*2);
 
 	return TRUE;
 
 }
 
+void CHomeHealthView::formatPatientEpisodeDXCode()
+{
+	CString szToken,szString;
+	szString.Format(_T("%s"),m_activePatientEpisode->m_episode_dx_codes);
+	m_szPatientEpisodeOneLineDXCodes.Empty();
+	if(szString.GetLength() > 0)
+	{
+		int curPos = 0;
+		szToken = szString.Tokenize(_T("\r\n"),curPos);
+		while(szToken !=_T(""))
+		{
+			m_szPatientEpisodeOneLineDXCodes += szToken;
+			m_szPatientEpisodeOneLineDXCodes += _T(" ");
+			szToken = szString.Tokenize(_T("\r\n"),curPos);
+		}
 
+	}
+
+}
 
 int CHomeHealthView::PopulateEpisodeControlData()
 {
@@ -272,24 +290,9 @@ int CHomeHealthView::PopulateEpisodeControlData()
 			lvitem.pszText= (LPTSTR)(LPCTSTR)(strItem);
 			m_episodeListCtrl.SetItem(&lvitem);
 
-			
-			CString szToken,szString;
-			szString.Format(_T("%s"),m_activePatientEpisode->m_episode_dx_codes);
-			strItem.Empty();
-			if(szString.GetLength() > 0)
-			{
-				int curPos = 0;
-				szToken = szString.Tokenize(_T("\r\n"),curPos);
-				while(szToken !=_T(""))
-				{
-					strItem += szToken;
-					strItem += _T(" ");
-					szToken = szString.Tokenize(_T("\r\n"),curPos);
-				}
-
-			}
+			formatPatientEpisodeDXCode();
 			lvitem.iSubItem = 6;
-			lvitem.pszText= (LPTSTR)(LPCTSTR)(strItem);
+			lvitem.pszText= (LPTSTR)(LPCTSTR)(m_szPatientEpisodeOneLineDXCodes);
 			m_episodeListCtrl.SetItem(&lvitem);
 			
 
@@ -315,6 +318,17 @@ int CHomeHealthView::PopulateEpisodeControlData()
 					m_patient_billing_status = EPISODE_BILLING_STATUS_OVERSIGHT;
 					m_activePatientEpisode->Update();
 				}
+			}
+		}
+		else if(m_activePatientEpisode->m_episode_billing_status == EPISODE_BILLING_STATUS_OVERSIGHT)
+		{
+			CTimeSpan ts = m_currentDate - m_activePatientEpisode->m_episode_last_bill_date;
+			if(ts.GetDays() < EPISODE_BILLING_DAYS)
+			{
+				m_activePatientEpisode->Edit();
+				m_activePatientEpisode->m_episode_billing_status = EPISODE_BILLING_STATUS_NA;
+				m_patient_billing_status = EPISODE_BILLING_STATUS_NA;
+				m_activePatientEpisode->Update();
 			}
 		}
 
@@ -356,14 +370,21 @@ int CHomeHealthView::PopulateEpisodeControlData()
 	
 }
 
-BOOL CHomeHealthView::findCPOCodeName(int code,CString& szCPOCodeName)
+BOOL CHomeHealthView::findCPOCodeName(Coversight_billing *oversight,CString& szCPOCodeName)
 {
+
+	
+	if(oversight->m_patient_oversight_cpo_code == 10)
+	{
+		szCPOCodeName = oversight->m_patient_oversight_cpo_desc;
+		return TRUE;
+	}
 
 	cpo_master->MoveFirst();
 
 	while(cpo_master->IsEOF() == FALSE)
 	{
-		if(code == cpo_master->m_oversight_cpo_code_id)
+		if(oversight->m_patient_oversight_cpo_code == cpo_master->m_oversight_cpo_code_id)
 		{
 			szCPOCodeName = cpo_master->m_oversight_cpo_code_name;
 			return TRUE;
@@ -481,14 +502,7 @@ BOOL CHomeHealthView::PopulateOversightControlData()
 			lvitem.pszText= (LPTSTR)(LPCTSTR)(strItem);
 			m_OverSightListCtrl.SetItem(&lvitem);
 
-			if(billing.m_patient_oversight_cpo_code == 10)
-			{
-				strItem = billing.m_patient_oversight_cpo_desc;
-			}
-			else
-			{
-				findCPOCodeName(billing.m_patient_oversight_cpo_code,strItem);
-			}
+			findCPOCodeName(&billing,strItem);
 			lvitem.iSubItem = 2;
 			lvitem.pszText= (LPTSTR)(LPCTSTR)(strItem);
 			m_OverSightListCtrl.SetItem(&lvitem);
@@ -1024,16 +1038,16 @@ void CHomeHealthView::printOversightBilling(CDC* pDC,CPrintInfo* pInfo)
 		pos_y += (row_height + title_space );
 		pDC->TextOutW(pos_x,pos_y,szText,szText.GetLength());
 
-		szText.Format(_T("Last Seen: %02d/%02d/%d"),m_activePatientEpisode->m_episode_last_visit.GetMonth()
-			,m_activePatientEpisode->m_episode_last_visit.GetDay()
-			,m_activePatientEpisode->m_episode_last_visit.GetYear());
+		szText.Format(_T("Last Seen: %02d/%02d/%d"),m_lastDateSeen.GetMonth()
+													,m_lastDateSeen.GetDay()
+													,m_lastDateSeen.GetYear());
 		pos_x  = right_margin;		
 		pDC->TextOutW(pos_x,pos_y,szText,szText.GetLength());
 
 		if(m_activePatientEpisode->m_episode_type.CompareNoCase(_T("Recertification")) == 0) 
-			szText.Format(_T("Activity: Recertification (G0179)"));
+			szText.Format(_T("Episode Type: Recertification (G0179)"));
 		else
-			szText.Format(_T("Activity: Initial Certification (G0180)"));
+			szText.Format(_T("Episode Type: Initial Certification (G0180)"));
 		pos_x  = margin + margin;		
 		pos_y += (row_height + title_space );
 		pDC->TextOutW(pos_x,pos_y,szText,szText.GetLength());
@@ -1047,9 +1061,12 @@ void CHomeHealthView::printOversightBilling(CDC* pDC,CPrintInfo* pInfo)
 		pos_x  = right_margin;		
 		pDC->TextOutW(pos_x,pos_y,szText,szText.GetLength());
 
+		szText.Format(_T("Activity: Home health care plan oversight CPO code G0181"));
+		pos_x  = margin + margin;		
+		pos_y += (row_height + title_space );
+		pDC->TextOutW(pos_x,pos_y,szText,szText.GetLength());
 
-//		pDC->SelectObject(fntHeader);
-//		pDC->GetTextMetrics(&tm);
+
 		szText.Format(_T("Oversight CPO Code"));
 		pos_x  = column1;		
 		pos_y += (row_height + title_space + row_margin);
@@ -1079,8 +1096,9 @@ void CHomeHealthView::printOversightBilling(CDC* pDC,CPrintInfo* pInfo)
 
 		while(oversight.IsEOF() == FALSE)
 		{
-	
-			findCPOCodeName(oversight.m_patient_oversight_cpo_code,szText);
+
+			findCPOCodeName(&oversight,szText);
+
 			pos_y += (row_height + title_space);
 			pDC->TextOutW(column1,pos_y,szText,szText.GetLength());
 
@@ -1122,7 +1140,8 @@ void CHomeHealthView::printOversightBilling(CDC* pDC,CPrintInfo* pInfo)
 		pos_y += (row_height + row_margin);
 		pDC->TextOutW(pos_x,pos_y,szText,szText.GetLength());
 
-		szText.Format(_T("Diagnosis:__________________________"));
+
+		szText.Format(_T("Diagnosis: %s"),m_szPatientEpisodeOneLineDXCodes);
 		pos_x  = (page_x - (szText.GetLength()*tm.tmAveCharWidth))/2;		
 		pos_y += (row_height + row_margin);
 		pDC->TextOutW(pos_x,pos_y,szText,szText.GetLength());
@@ -1322,7 +1341,7 @@ void CHomeHealthView::AddNewOversightBilling()
 			if(m_ActivePatient->m_patient_last_bill_date == 0)
 				last_billed_date = m_ActivePatient->m_patient_registration_date;
 			else
-				last_billed_date = m_ActivePatient->m_patient_oversight_bill_date;
+				last_billed_date = m_ActivePatient->m_patient_last_bill_date;
 
 			
 			if(m_activePatientEpisode->m_episode_billing_status == EPISODE_BILLING_STATUS_NA)
@@ -1687,6 +1706,7 @@ void CHomeHealthView::OnBnClickedButtonbill()
 	// check if what is the status of the bill code -
 	// if it is G0179 or G0180, Then it is initial billing or recertification billing. of TX(485) 
 	// Otherwise it is G0181 or G0182, that is oversight billing.
+	m_patient_bill_code = -1;
 	if(m_activePatientEpisode->m_episode_billing_status == 1) // Initial Billing
 	{
 		CInitialBillingDlg dlg(m_ActivePatient,m_activePatientEpisode);
@@ -1701,6 +1721,7 @@ void CHomeHealthView::OnBnClickedButtonbill()
 		COversightBillingDlg dlg(this,m_ActivePatient,m_activePatientEpisode);
 		if(IDOK == dlg.DoModal())
 		{
+			m_lastDateSeen = dlg.m_dateLastSeen;
 			homehealth_printmode = homehealth_print_oversight_bill;
 			PostMessage(WM_COMMAND,ID_FILE_PRINT);
 		}
@@ -1715,7 +1736,7 @@ void CHomeHealthView::OnBnClickedButtonbill()
 
 
 
-void CHomeHealthView::OnCompleteInitialBillPrintingCommon()
+long CHomeHealthView::OnCompleteInitialBillPrintingCommon()
 {
 	m_activeBilling->AddNew();
 
@@ -1738,6 +1759,9 @@ void CHomeHealthView::OnCompleteInitialBillPrintingCommon()
 
 	m_activeBilling->Update();
 
+	m_activeBilling->SetAbsolutePosition(-1);
+
+	return m_activeBilling->m_patient_bill_number;
 
 
 }
@@ -1745,7 +1769,7 @@ void CHomeHealthView::OnCompleteInitialBillPrintingCommon()
 // completion of Oversight billing
 void CHomeHealthView::OnCompleteOversightBillPrinting()
 {
-	OnCompleteInitialBillPrintingCommon();
+	long billnumber = OnCompleteInitialBillPrintingCommon();
 
 	// update the billing status back to normal 
 	m_activePatientEpisode->Edit();
@@ -1780,6 +1804,7 @@ void CHomeHealthView::OnCompleteOversightBillPrinting()
 	{
 		oversight.Edit();
 		oversight.m_patient_oversight_billed = TRUE;
+		oversight.m_patient_bill_number = billnumber;
 		oversight.Update();
 		oversight.MoveNext();
 	}

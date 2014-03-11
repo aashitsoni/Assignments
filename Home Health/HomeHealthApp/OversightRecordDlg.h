@@ -27,6 +27,7 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	int CompareDates(CTime* time1,CTime* time2);
 
 	DECLARE_MESSAGE_MAP()
 public:

@@ -1,5 +1,6 @@
 #pragma once
 #include "afxcmn.h"
+#include "afxdtctl.h"
 
 
 // COversightBillingDlg dialog
@@ -31,4 +32,6 @@ protected:
 public:
 	virtual BOOL OnInitDialog();
 	CListCtrl m_oversightList;
+	CTime m_dateLastSeen;
+	afx_msg void OnBnClickedOk();
 };

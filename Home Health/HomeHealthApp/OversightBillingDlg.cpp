@@ -37,10 +37,13 @@ void COversightBillingDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_OVERSIGHT_LIST, m_oversightList);
+	DDX_DateTimeCtrl(pDX, IDC_DT_LASTSEEN, m_dateLastSeen);
 }
 
 
 BEGIN_MESSAGE_MAP(COversightBillingDlg, CDialogEx)
+//	ON_EN_CHANGE(IDC_DIAGNOSIS, &COversightBillingDlg::OnEnChangeDiagnosis)
+	ON_BN_CLICKED(IDOK, &COversightBillingDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -99,7 +102,7 @@ void COversightBillingDlg::PopulateOversightBillingList()
 	while(m_oversight->IsEOF() == FALSE)
 	{
 		lvitem.mask = LVIF_TEXT;
-		((CHomeHealthView*)m_pView)->findCPOCodeName(m_oversight->m_patient_oversight_cpo_code,strItem);
+		((CHomeHealthView*)m_pView)->findCPOCodeName(m_oversight,strItem);
 
 		lvitem.iItem = item;
 		lvitem.iSubItem = 0;
@@ -126,6 +129,8 @@ void COversightBillingDlg::PopulateOversightBillingList()
 		lvitem.iSubItem = 3;
 		lvitem.pszText= (LPTSTR)(LPCTSTR)(strItem);
 		m_oversightList.SetItem(&lvitem);
+
+		m_dateLastSeen = m_oversight->m_patient_oversight_date;
 
 		m_oversight->MoveNext();
 		item++;
@@ -170,10 +175,7 @@ BOOL COversightBillingDlg::OnInitDialog()
 	
 	GetDlgItem(IDC_MONTH)->SetWindowTextW(GetCurrentMonth());
 
-	szText.Format(L"%02d/%02d/%d",m_episode->m_episode_last_visit.GetMonth()
-								,m_episode->m_episode_last_visit.GetDay()
-								,m_episode->m_episode_last_visit.GetYear());
-	GetDlgItem(IDC_LAST_SEEN)->SetWindowTextW(szText);
+
 
 	szText.Format(L"%02d/%02d/%d-%02d/%02d/%d",m_episode->m_episode_start_date.GetMonth()
 											  ,m_episode->m_episode_start_date.GetDay()
@@ -181,6 +183,8 @@ BOOL COversightBillingDlg::OnInitDialog()
 											  ,m_episode->m_episode_end_date.GetMonth()
 											  ,m_episode->m_episode_end_date.GetDay()
 											  ,m_episode->m_episode_end_date.GetYear());
+	GetDlgItem(IDC_EOS)->SetWindowTextW(szText);
+
 
 
 	PopulateOversightBillingList();
@@ -193,6 +197,7 @@ BOOL COversightBillingDlg::OnInitDialog()
 									 pApp->m_localTime.wYear);
 	
 	GetDlgItem(IDC_BILL_DATE)->SetWindowTextW(szText);
+	GetDlgItem(IDC_DIAGNOSIS)->SetWindowTextW( ((CHomeHealthView*)m_pView)->m_szPatientEpisodeOneLineDXCodes);
 
 	m_oversight->Close();
 
@@ -200,3 +205,19 @@ BOOL COversightBillingDlg::OnInitDialog()
 }
 
 
+
+
+
+void COversightBillingDlg::OnBnClickedOk()
+{
+	// TODO: Add your control notification handler code here
+	UpdateData(TRUE);
+
+	if(m_dateLastSeen == m_episode->m_episode_last_visit)
+	{
+		if(IDYES != AfxMessageBox(_T("Patient's Last seen is same as last oversight record. Do you want to continue?"),MB_YESNO))
+			return;
+	}
+
+	CDialogEx::OnOK();
+}

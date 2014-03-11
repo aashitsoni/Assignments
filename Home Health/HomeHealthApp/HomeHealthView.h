@@ -11,6 +11,7 @@
 #include "patient_master.h"
 #include "patient_episode.h"
 #include "patient_billing.h"
+#include "oversight_billing.h"
 
 class CHomeHealthSet;
 
@@ -44,7 +45,7 @@ public:
     CHomeHealthSet* m_pSet;
     CString GetCurrentMonth();
     void OnCompleteInitialBillPrinting();
-    void OnCompleteInitialBillPrintingCommon();
+    long OnCompleteInitialBillPrintingCommon();
 // Attributes
 public:
     CHomeHealthDoc* GetDocument() const;
@@ -99,11 +100,16 @@ private:
     long        m_active_episode_id;
     CTime       m_patient_episode_start_date;
     CTime       m_patient_episode_end_date;
+	long		m_patient_bill_code;
+	Cpatient_episode* m_printPatientEpisode;
+	Coversight_billing* m_printPatientOversight;
+
 
     CString m_szPatientID;
     CString m_szPatientAddress;
     CString m_szPatientTown;
     CString m_szTotalMinutes;
+	CTime	m_lastDateSeen;
 
     Coversight_cpo_code_master *cpo_master;
     void AddNewEpisode();
@@ -112,9 +118,11 @@ private:
     void printInitialBilling(CDC* pDC,CPrintInfo* pInfo);
     void printOversightBilling(CDC* pDC,CPrintInfo* pInfo);
     void printPatientLeadger(CDC* pDC,CPrintInfo* pInfo);
+	void formatPatientEpisodeDXCode();
 
 public:
-    BOOL findCPOCodeName(int code,CString& szCPOCodeName);
+	CString m_szPatientEpisodeOneLineDXCodes;
+    BOOL findCPOCodeName(Coversight_billing* oversight,CString& szCPOCodeName);
 
 public:
     afx_msg void OnLvnItemchangedPatientEpisode(NMHDR *pNMHDR, LRESULT *pResult);

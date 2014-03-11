@@ -143,9 +143,9 @@
 #define IDC_DOB                         1076
 #define IDC_COMM_COMBO                  1076
 #define IDC_ACTIVITY                    1077
-#define IDC_EDIT1                       1077
 #define IDC_EOS                         1078
 #define IDC_LAST_SEEN                   1079
+#define IDC_DT_LASTSEEN                 1079
 #define IDC_DATE                        1080
 #define IDC_MONTH                       1080
 #define ID_EPISODE_EDIT                 32771
@@ -182,7 +182,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        335
 #define _APS_NEXT_COMMAND_VALUE         32797
-#define _APS_NEXT_CONTROL_VALUE         1078
+#define _APS_NEXT_CONTROL_VALUE         1080
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

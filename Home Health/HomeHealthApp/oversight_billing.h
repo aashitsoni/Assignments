@@ -29,6 +29,7 @@ public:
 	CString m_patient_oversight_cpo_desc;
 	CString	m_patient_oversight_diagnosis;
 	BOOL	m_patient_oversight_billed;
+	long	m_patient_bill_number;
 
 
 // Overrides
