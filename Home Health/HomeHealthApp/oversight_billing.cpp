@@ -138,3 +138,14 @@ int Coversight_billing::OpenForOversightDelete(long patient_oversight_id)
 	}
 	return -1;
 }
+
+int Coversight_billing::OpenByBillingid(long patient_billing_id)
+{
+	m_strFilter.Format(_T("patient_bill_number = %ld"), patient_billing_id);
+	if( TRUE == CRecordset::Open(m_nDefaultType,GetDefaultSQL(),CRecordset::readOnly ))
+	{
+		return 0;
+	}
+	return -1;
+
+}

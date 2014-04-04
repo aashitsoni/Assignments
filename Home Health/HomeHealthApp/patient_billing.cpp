@@ -22,7 +22,9 @@ Cpatient_billing::Cpatient_billing(CDatabase* pdb)
 	m_patient_hh_agency_code = 0;
 	m_patient_sent_fax = 0;
 	m_patient_sent_email = 0;
-	m_nFields = 8;
+	m_patient_last_seen = 0;
+	m_patient_bill_minutes = 0;
+	m_nFields = 10;
 	m_nDefaultType = dynaset;
 
 }
@@ -61,6 +63,8 @@ void Cpatient_billing::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Long(pFX, _T("[patient_hh_agency_code]"), m_patient_hh_agency_code);
 	RFX_Int (pFX, _T("[patient_sent_fax]"),m_patient_sent_fax);
 	RFX_Int (pFX, _T("[patient_sent_email]"),m_patient_sent_email);
+	RFX_Date(pFX, _T("[patient_last_seen]"),m_patient_last_seen);
+	RFX_Int (pFX, _T("[patient_bill_minutes]"),m_patient_bill_minutes);
 
 }
 
@@ -80,6 +84,16 @@ int Cpatient_billing::OpenExclusive(long patient_id)
 {
 	m_strFilter.Format(_T("patient_id = %ld"),patient_id);
 	if( TRUE == CRecordset::Open(m_nDefaultType,GetDefaultSQL(),CRecordset::none|CRecordset::useBookmarks))
+	{
+		return 0;
+	}
+	return -1;
+}
+
+int Cpatient_billing::OpenbyBillNumber(long patient_bill_number)
+{
+	m_strFilter.Format(_T("patient_bill_number = %ld"),patient_bill_number);
+	if( TRUE == CRecordset::Open(m_nDefaultType,GetDefaultSQL(),CRecordset::readOnly))
 	{
 		return 0;
 	}

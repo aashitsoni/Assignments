@@ -18,10 +18,12 @@ IMPLEMENT_DYNAMIC(COversightBillingDlg, CDialogEx)
 COversightBillingDlg::COversightBillingDlg(void* pView
 										   ,Cpatient_master* patient
 										   ,Cpatient_episode* episode
+										   ,Cpatient_billing* billing
 										   ,CWnd* pParent /*=NULL*/)
 	: CDialogEx(COversightBillingDlg::IDD, pParent)
 	,m_patient(patient)
 	,m_episode(episode)
+	,m_billing(billing)
 	,m_pView(pView)
 {
 
@@ -139,17 +141,32 @@ void COversightBillingDlg::PopulateOversightBillingList()
 
 BOOL COversightBillingDlg::OnInitDialog()
 {
+	int nReturn = 0;
 	CString szText;
 	CDialogEx::OnInitDialog();
 	CHomeHealthApp* pApp = (CHomeHealthApp*) AfxGetApp();
 
-	m_oversight = new Coversight_billing();
 
-	if (m_oversight->OpenForOversightBilling(m_episode->m_patient_episode_code) !=0)
+	m_oversight = 0;
+	m_oversight = new Coversight_billing();
+	if(m_oversight == NULL)
 	{
-		AfxMessageBox(L"Error Opening oversight billing records",MB_OK);
+		AfxMessageBox(_T("Error allcoating memory"),MB_OK);
 		return FALSE;
 	}
+
+	if(m_billing == NULL)
+		nReturn = m_oversight->OpenForOversightBilling(m_episode->m_patient_episode_code);
+	else
+		nReturn = m_oversight->OpenByBillingid(m_billing->m_patient_bill_number);
+
+	if(nReturn != 0)
+		{
+			AfxMessageBox(L"Error opening oversight billing records",MB_OK);
+			return FALSE;
+		}
+
+
 	GetDlgItem(IDC_HH_AGENCY)->SetWindowTextW(m_episode->m_episode_hh_agency_name);
 	szText.Format(L"%s %s",m_patient->m_patient_firstname,m_patient->m_patient_lastname);
 
@@ -189,7 +206,10 @@ BOOL COversightBillingDlg::OnInitDialog()
 
 	PopulateOversightBillingList();
 
-	szText.Format(_T("%d"),m_episode->m_episode_total_minutes);
+	if(m_billing)
+		szText.Format(_T("%d"),m_billing->m_patient_bill_minutes);
+	else
+		szText.Format(_T("%d"),m_episode->m_episode_total_minutes);
 	GetDlgItem(IDC_TOTAL_MINS)->SetWindowTextW(szText);
 
 	szText.Format(_T("%02d/%02d/%d"),pApp->m_localTime.wMonth,
@@ -199,8 +219,12 @@ BOOL COversightBillingDlg::OnInitDialog()
 	GetDlgItem(IDC_BILL_DATE)->SetWindowTextW(szText);
 	GetDlgItem(IDC_DIAGNOSIS)->SetWindowTextW( ((CHomeHealthView*)m_pView)->m_szPatientEpisodeOneLineDXCodes);
 
+	if(m_billing)
+		m_dateLastSeen = m_billing->m_patient_last_seen;
+
 	m_oversight->Close();
 
+	UpdateData(FALSE);
 	return TRUE;  // return TRUE unless you set the focus to a control
 }
 
@@ -213,10 +237,13 @@ void COversightBillingDlg::OnBnClickedOk()
 	// TODO: Add your control notification handler code here
 	UpdateData(TRUE);
 
-	if(m_dateLastSeen == m_episode->m_episode_last_visit)
+	if(m_billing == NULL)
 	{
-		if(IDYES != AfxMessageBox(_T("Patient's Last seen is same as last oversight record. Do you want to continue?"),MB_YESNO))
-			return;
+		if(m_dateLastSeen == m_episode->m_episode_last_visit)
+		{
+			if(IDYES != AfxMessageBox(_T("Patient's Last seen is same as last oversight record. Do you want to continue?"),MB_YESNO))
+				return;
+		}
 	}
 
 	CDialogEx::OnOK();

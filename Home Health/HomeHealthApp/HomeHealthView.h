@@ -77,6 +77,9 @@ protected:
     Cpatient_master* m_ActivePatient;
     Cpatient_episode* m_activePatientEpisode;
     Cpatient_billing* m_activeBilling;
+	Cpatient_billing* m_printBilling;
+	Cpatient_episode* m_printEpisode;
+	Coversight_billing* m_printOversight;
 
     
 
@@ -101,8 +104,6 @@ private:
     CTime       m_patient_episode_start_date;
     CTime       m_patient_episode_end_date;
 	long		m_patient_bill_code;
-	Cpatient_episode* m_printPatientEpisode;
-	Coversight_billing* m_printPatientOversight;
 
 
     CString m_szPatientID;
@@ -118,7 +119,9 @@ private:
     void printInitialBilling(CDC* pDC,CPrintInfo* pInfo);
     void printOversightBilling(CDC* pDC,CPrintInfo* pInfo);
     void printPatientLeadger(CDC* pDC,CPrintInfo* pInfo);
-	void formatPatientEpisodeDXCode();
+	void formatPatientEpisodeDXCode(Cpatient_episode*,CString*);
+	void OpenRecordsForBillPrinting(Cpatient_billing* pBilling);
+	void ReleaseBillPrintRecord();
 
 public:
 	CString m_szPatientEpisodeOneLineDXCodes;
@@ -184,6 +187,8 @@ public:
 //	afx_msg void OnCbnSelchangeCombo2();
 private:
 	CComboBox m_comboCommunication;
+public:
+	afx_msg void OnDblclkBillList(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 #ifndef _DEBUG  // debug version in MDFMDIAppView.cpp

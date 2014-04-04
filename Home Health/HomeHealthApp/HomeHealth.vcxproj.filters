@@ -90,6 +90,12 @@
     <ClInclude Include="OversightBillingDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PatientBillContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EpisodeListDrawHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -153,6 +159,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OversightBillingDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PatientBillContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EpisodeListDrawHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -52,6 +52,7 @@ public:
 	int Open(long patient_id);
 	int Open();
 	int OpenForAdd();
+	int OpenForEpisodeId(long patient_episode_id);
 	int OpenForModify(long patient_id,long patient_episode_id);
 	int QueryPatientEpisode(long episode_id);
 	BOOL SetDB(CDatabase* pDB);

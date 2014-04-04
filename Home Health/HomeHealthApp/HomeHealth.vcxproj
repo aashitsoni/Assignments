@@ -193,6 +193,7 @@
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="CommonDefines.h" />
     <ClInclude Include="EpisodeDlg.h" />
+    <ClInclude Include="EpisodeListDrawHelper.h" />
     <ClInclude Include="hh_agency_master.h" />
     <ClInclude Include="HomeHealthDatabase.h" />
     <ClInclude Include="InitialBillingDlg.h" />
@@ -206,6 +207,7 @@
     <ClInclude Include="oversight_billing.h" />
     <ClInclude Include="oversight_cpo_code_master.h" />
     <ClInclude Include="oversight_health.h" />
+    <ClInclude Include="PatientBillContext.h" />
     <ClInclude Include="PatientSearchDlg.h" />
     <ClInclude Include="patient_billing.h" />
     <ClInclude Include="patient_episode.h" />
@@ -218,6 +220,7 @@
     <ClCompile Include="AddPatientDlg.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="EpisodeDlg.cpp" />
+    <ClCompile Include="EpisodeListDrawHelper.cpp" />
     <ClCompile Include="hh_agency_master.cpp" />
     <ClCompile Include="HomeHealthDatabase.cpp" />
     <ClCompile Include="InitialBillingDlg.cpp" />
@@ -231,6 +234,7 @@
     <ClCompile Include="oversight_billing.cpp" />
     <ClCompile Include="oversight_cpo_code_master.cpp" />
     <ClCompile Include="oversight_health.cpp" />
+    <ClCompile Include="PatientBillContext.cpp" />
     <ClCompile Include="PatientSearchDlg.cpp" />
     <ClCompile Include="patient_billing.cpp" />
     <ClCompile Include="patient_episode.cpp" />

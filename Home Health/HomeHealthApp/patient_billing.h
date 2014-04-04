@@ -27,6 +27,8 @@ public:
 	long		m_patient_hh_agency_code;
 	int			m_patient_sent_fax;
 	int			m_patient_sent_email;
+	CTime		m_patient_last_seen;
+	int			m_patient_bill_minutes;
 // Overrides
 	// Wizard generated virtual function overrides
 	public:
@@ -40,6 +42,7 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 	int OpenExclusive(long patient_id);
+	int OpenbyBillNumber(long patient_bill_number);
 
 };
 

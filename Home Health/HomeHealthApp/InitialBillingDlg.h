@@ -11,7 +11,7 @@ class CInitialBillingDlg : public CDialogEx
 public:
 	CInitialBillingDlg(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CInitialBillingDlg();
-	CInitialBillingDlg(Cpatient_master*,Cpatient_episode*);
+	CInitialBillingDlg(Cpatient_master*,Cpatient_episode*,Cpatient_billing* patient_bill = NULL);
 
 
 // Dialog Data
@@ -23,6 +23,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 	Cpatient_master* m_selectedPatient;
 	Cpatient_episode* m_selectedEpisode;
+	Cpatient_billing* m_selectedPatientBill;
 public:
 	virtual BOOL OnInitDialog();
 	CString m_patientname;

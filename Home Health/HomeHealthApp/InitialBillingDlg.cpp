@@ -5,8 +5,10 @@
 #include "HomeHealthApp.h"
 #include "patient_master.h"
 #include "patient_episode.h"
+#include "patient_billing.h"
 #include "InitialBillingDlg.h"
 #include "afxdialogex.h"
+
 
 
 // CInitialBillingDlg dialog
@@ -27,10 +29,11 @@ CInitialBillingDlg::~CInitialBillingDlg()
 {
 }
 
-CInitialBillingDlg::	CInitialBillingDlg(Cpatient_master* patient,Cpatient_episode* episode)
+CInitialBillingDlg::	CInitialBillingDlg(Cpatient_master* patient,Cpatient_episode* episode,Cpatient_billing* patient_billing)
 	:CDialogEx(CInitialBillingDlg::IDD,NULL),
 	m_selectedPatient(patient),
-	m_selectedEpisode(episode)
+	m_selectedEpisode(episode),
+	m_selectedPatientBill(patient_billing)
 {
 }
 

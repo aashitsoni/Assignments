@@ -12,13 +12,15 @@ class COversightBillingDlg : public CDialogEx
 	Cpatient_master *m_patient;
 	Cpatient_episode *m_episode;
 	Coversight_billing *m_oversight;
+	Cpatient_billing* m_billing;
 	CString GetCurrentMonth();
 	void PopulateOversightBillingList();
 	void* m_pView;
 public:
 	COversightBillingDlg(void* pView
 						 ,Cpatient_master* patient
-						 ,Cpatient_episode* episode  
+						 ,Cpatient_episode* episode
+						 ,Cpatient_billing* billing= NULL
 						 ,CWnd* pParent = NULL);   // standard constructor
 	virtual ~COversightBillingDlg();
 

@@ -167,3 +167,13 @@ int Cpatient_episode::OpenForModifyWithEpisodeId(long patient_episode_id)
 	return -1;
 
 }
+
+int Cpatient_episode::OpenForEpisodeId(long patient_episode_id)
+{
+	m_strFilter.Format(_T("patient_episode_code=%ld"),patient_episode_id);
+	if( TRUE == CRecordset::Open(m_nDefaultType,GetDefaultSQL(),CRecordset::readOnly))
+	{
+		return 0;
+	}
+	return -1;
+}

@@ -45,6 +45,7 @@ public:
 	int InsertNew();
 	int OpenForOversightBilling(int patient_episode_id);
 	int OpenForOversightDelete(long patient_oversight_id);
+	int OpenByBillingid(long patient_billing_id);
 
 
 
